@@ -8,31 +8,29 @@ def interaccionUsuario():
         print(dataframe.df)
         return interaccionUsuario()
     elif opcion == "2":
-        return imprimirConFiltros()
+        imprimirConFiltros()
     elif opcion == "3":
         return "Atras"
     else:
         print("Elija una opcion correcta.")
-        return interaccionUsuario()
-
-    return
+        interaccionUsuario()
+    
+    return "Atras"
 
 def imprimirConFiltros():
     columna = utilidades.hallarColumna()
     if columna is None:
-        interaccionUsuario()
-        return
+        return interaccionUsuario()
 
     condicion = utilidades.obtenerCondicion()
     if condicion is None:
-        interaccionUsuario()
-        return
+        return interaccionUsuario()
 
     valor = input("Escriba el valor para filtrar. Procure que el valor a ser ingresado coincida con el tipo de dato de la columna: ")
 
     try:
         if condicion is None:
-            interaccionUsuario()
+            return interaccionUsuario()
         else:
             filtrado.imprimirDataframeFiltro(condicion, columna, valor)
     except:
@@ -40,5 +38,4 @@ def imprimirConFiltros():
         imprimirConFiltros()
         return
 
-    interaccionUsuario()
-    return
+    return interaccionUsuario()

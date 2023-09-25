@@ -1,37 +1,28 @@
-"""
-Información: Este paquete contendrá las funciones que permitan obtener la información pertinente para el preprocesamiento del dataset, tales como: 
-cantidad de valores NaN o de cualquier otro valor (general y por columna), cantidad de valores NaN consecutivos por columna, mapa de calor de los valores NaN 
-o de cualquier otro valor o rango,  mapas de calor que permitan identificar la distancia de los valores a la media de la columna, diagramas de cajas y bigotes 
-por columna, cuartiles por columna, etc.
-"""
-
-"""
-*Cantidad de valores
-    *Nulos
-        *General
-        *Columna
-    *No nulos
-        *General
-        *Columna
-*Mapa de calor
-
-"""
 import dataframe
 import utilidades
 import pandas as pd
+import seaborn as sns
 
 def interaccionUsuario():
-    opcion = input("\nElija el metodo para visualizar la informacion del conjunto de datos: \n1)Cantidad de valores. \n2)Regresar al menu anterior. \n")
+    opcion = input("\nElija el metodo para visualizar la informacion del conjunto de datos: \n1)Cantidad de valores. \n2)Cantidad de valores unicos por columna. \n3)Mapa de calor de valores nulos. \n4)Grafico de barras. \n5)Histograma. \n6)Regresar al menu anterior. \n")
 
     if opcion == "1":
-        return interaccionUsuarioCantidad()
+        interaccionUsuarioCantidad()
     elif opcion == "2":
+        interaccionUsuarioValoresUnicos()
+    elif opcion == "3":
+        mapaCalor()
+    elif opcion == "4":
+        graficoBarras()
+    elif opcion == "5":
+        histograma()
+    elif opcion == "6":
         return "Atras"
     else:
         print("\nElija una opcion correcta.")
-        return interaccionUsuario()
+        interaccionUsuario()
 
-    return
+    return "Atras"
 
 def interaccionUsuarioCantidad():
     opcion = input("\nElija el tipo de valores que desea visualizar: \n1)Nulos. \n2)No nulos. \n3)Regresar al menu anterior. \n")
@@ -41,7 +32,7 @@ def interaccionUsuarioCantidad():
     elif opcion == "2":
         interaccionUsuarioCantidadNoNulos()
     elif opcion == "3":
-        interaccionUsuario()
+        return interaccionUsuario()
     else:
         print("\nElija una opcion correcta.")
         interaccionUsuarioCantidad()
@@ -67,7 +58,7 @@ def interaccionUsuarioCantidadNulos():
 
 def cantidadNulosGeneral():
     return dataframe.df.isna().sum()
-
+    
 def cantidadNulosColumna():
     columna = utilidades.hallarColumna()
     if columna is None:
@@ -104,3 +95,53 @@ def cantidadNoNulosColumna():
     
     return dataframe.df[columna].count()
 
+def interaccionUsuarioValoresUnicos():
+    opcion = input("\nElija si desea incluir valores nulos en la busqueda: \n1)Incluir valores nulos. \n2)No incluir valores nulos. \n3)Regresar al menu anterior. \n")
+
+    if opcion == "1":
+        print(f"\nValores unicos por columna: \n{valoresUnicosColumna(True)}")
+        interaccionUsuarioValoresUnicos()
+    elif opcion == "2":
+        print(f"\nValores unicos por columna: \n{valoresUnicosColumna(False)}")
+        interaccionUsuarioValoresUnicos()
+    elif opcion == "3":
+        interaccionUsuario()
+    else:
+        print("\nElija una opcion correcta.")
+        interaccionUsuarioValoresUnicos()
+
+    return
+
+def valoresUnicosColumna(nulos):
+    columna = utilidades.hallarColumna()
+    if columna is None:
+        interaccionUsuario()
+        return
+
+    if nulos:
+        return dataframe.df[columna].value_counts(dropna=False)
+    else:
+        return dataframe.df[columna].value_counts()
+    
+def mapaCalor():
+    sns.heatmap(dataframe.df.isnull(), cbar=False)
+    return
+
+def graficoBarras():
+    columna = utilidades.hallarColumna()
+    if columna is None:
+        interaccionUsuario()
+        return
+    
+    dataframe.df[columna].value_counts().sort_index(ascending=True).plot(kind = 'bar')
+    return
+
+def histograma():
+    columna = utilidades.hallarColumna()
+    if columna is None:
+        interaccionUsuario()
+        return
+    
+    dataframe.df[columna].hist(bins=10)
+    return
+    

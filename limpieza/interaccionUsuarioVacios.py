@@ -5,16 +5,16 @@ import utilidades
 def interaccionUsuarioVacios():
     opcion = input("\nElija el metodo para limpiar los valores vacios: \n1)Eliminar filas con celdas vacias. \n2)Reemplazar valores vacios. \n3)Regresar al menu anterior. \n")
     if opcion == "1":
-        return interaccionUsuarioVaciosEliminar()
+        interaccionUsuarioVaciosEliminar()
     elif opcion == "2":
-        return interaccionUsuarioVaciosReemplazar()
+        interaccionUsuarioVaciosReemplazar()
     elif opcion == "3":
         return "Atras"
     else:
         print("Elija una opcion correcta.")
-        return interaccionUsuarioVacios()
+        interaccionUsuarioVacios()
 
-    return
+    return "Atras"
 
 def interaccionUsuarioVaciosEliminar():
     opcion = input("\nElija en donde quiere eliminar los valores vacios: \n1)Todo el conjunto de datos. \n2)Columna especificada. \n3)Regresar al menu anterior. \n")
@@ -27,7 +27,7 @@ def interaccionUsuarioVaciosEliminar():
 
         filtrado.limpiarCeldasVaciasColumna(columna)
     elif opcion == "3":
-        interaccionUsuarioVacios()
+        return interaccionUsuarioVacios()
     else:
         print("Elija una opcion correcta.")
         interaccionUsuarioVaciosEliminar()
@@ -44,7 +44,7 @@ def interaccionUsuarioVaciosReemplazar():
     elif opcion == "2":
         interaccionUsuarioVaciosReemplazarColumna()
     elif opcion == "3":
-        interaccionUsuarioVacios()
+        return interaccionUsuarioVacios()
     else:
         print("Elija una opcion correcta.")
         interaccionUsuarioVaciosReemplazar()

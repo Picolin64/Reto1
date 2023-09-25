@@ -6,14 +6,16 @@ import utilidades
 def interaccionUsuarioIncorrectos():
     opcion = input("\nElija el metodo para limpiar los datos incorrectos: \n1)Reemplazar valores incorrectos. \n2)Remover filas con valores incorrectos. \n3)Regresar al menu anterior. \n")
     if opcion == "1":
-        return interaccionUsuarioIncorrectosReemplazar()
+        interaccionUsuarioIncorrectosReemplazar()
     elif opcion == "2":
-        return interaccionUsuarioIncorrectosRemover()
+        interaccionUsuarioIncorrectosRemover()
     elif opcion == "3":
         return "Atras"
     else:
         print("Elija una opcion correcta.")
-        return interaccionUsuarioIncorrectos()
+        interaccionUsuarioIncorrectos()
+    
+    return "Atras"
 
 def interaccionUsuarioIncorrectosReemplazar():
     opcion = input("\nElija en donde quiere reemplazar valores incorrectos: \n1)Todo el conjunto de datos. \n2)Fila especificada. \n3)Regresar al menu anterior. \n")
@@ -22,7 +24,7 @@ def interaccionUsuarioIncorrectosReemplazar():
     elif opcion == "2":
         interaccionUsuarioIncorrectosReemplazarFila()
     elif opcion == "3":
-        interaccionUsuarioIncorrectos()
+        return interaccionUsuarioIncorrectos()
     else:
         print("Elija una opcion correcta.")
         interaccionUsuarioIncorrectosReemplazar()
@@ -83,7 +85,7 @@ def interaccionUsuarioIncorrectosRemover():
     elif opcion == "2":
         interaccionUsuarioIncorrectosRemoverFila()
     elif opcion == "3":
-        interaccionUsuarioIncorrectos()
+        return interaccionUsuarioIncorrectos()
     else:
         print("Elija una opcion correcta.")
         interaccionUsuarioIncorrectosReemplazar()

@@ -4,7 +4,7 @@ import limpieza.interaccionUsuario
 
 
 def interaccionUsuario():
-    opcion = input("\nElija la accion a realizar con el conjunto de datos: \n1)Imprimir el conjunto de datos. \n2)Graficar el conjunto de datos. \n3)Limpiar el conjunto de datos. \n4)Cargar un nuevo conjunto de datos. \n")
+    opcion = input("\nElija la accion a realizar con el conjunto de datos: \n1)Imprimir el conjunto de datos. \n2)Visualizar informacion del conjunto de datos. \n3)Limpiar el conjunto de datos. \n4)Cargar un nuevo conjunto de datos. \n")
     if opcion == "1":
         respuesta = imprimir.interaccionUsuario()
     elif opcion == "2":
